@@ -32,6 +32,9 @@ function MemberInfoComponent(props) {
     const [openInsertUserAccountPAY, setOpenInsertUserAccountPAY] = useState(false);
     const [openUpdateUserRepay, setOpenUpdateUserRepay] = useState(false);
 
+    const [man, setman] = useState(false);
+    const [woman, setwoman] = useState(false);
+
     const Change_user = {
         user_email : user_email,
         change_email : change_email,
@@ -43,6 +46,9 @@ function MemberInfoComponent(props) {
         ApiService.userAccount(user_email)
             .then( res => {
                 setuser_account(res.data);
+                console.log("man :"+man);
+                console.log("woman : "+woman);
+                checkGender()
             })
             .catch(err => {
                 console.log('user_account print error!', err);
@@ -131,11 +137,13 @@ function MemberInfoComponent(props) {
         
         // 환불 계좌 모달 띄우기
         setOpenUserAccountInsert(false);
+
         // 환불 계좌 정부 입력창 1
         setUserAccount01(false);
 
         // 회원 탈퇴 모달 띄우기
         setOpenUserDelete(false);
+
         // 회원 탈퇴 다시 묻는 모달 띄우기
         setOpenReCheckUserDelete(false);
         
@@ -155,10 +163,11 @@ function MemberInfoComponent(props) {
         }
     }
 
-    const checkGender = (e) => {
-        if(props.user.user_gender === e.target.value){
-            // console.log("props : " +props.user.user_gender);
-            // console.log("targetvalue : " + e.target.value);
+    function checkGender(){
+        if(props.user.user_gender === "M"){
+            setman(true);
+        }else{
+            setwoman(true);
         }
     }
 
@@ -242,11 +251,12 @@ function MemberInfoComponent(props) {
                     <div style={{fontSize:'13px', textAlign:'left', marginTop:'50px'}}>부가정보(선택)</div>
                     <hr style={{height:'1px', backgroundColor:'lightgray', border:'0px', opacity:'70%', margin:'20px 0px 20px 0px', paddingBottom:'0px'}}/>
 
+                    {/* {checkGender()} */}
                     <div style={centerDiv}>
                         <div style={centerLabel}>성별</div>
                         <div style={{fontSize:'14px', marginTop:'10px', justifyContent:'left', display:'flex'}}>
-                            <input type='radio' name='gender' value='M' onChange={checkGender} disabled/> 남 
-                            <input type='radio' name='gender' value='W' onChange={checkGender} disabled/> 여
+                            <input type='radio' name='gender' value='M' checked={man} disabled /> 남 
+                            <input type='radio' name='gender' value='W' checked={woman} disabled /> 여
                         </div>
                     </div>
 
