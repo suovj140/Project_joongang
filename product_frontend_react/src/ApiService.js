@@ -2,6 +2,8 @@ import axios from 'axios';
 
 const PRODUCT_API_BASE_URL = "http://localhost:8080/products";
 const USER_API_BASE_URL = "http://localhost:8080/mycos";
+const ORDER_API_BASE_URL = "http://localhost:8080/order";
+
 
 class ApiService {
 
@@ -73,6 +75,10 @@ class ApiService {
 
     insertUserAddress(user_info){
         return axios.post(USER_API_BASE_URL+'/insertuseraddress',user_info);
+    }
+
+    getUserOrderList(user_email){
+        return axios.get(ORDER_API_BASE_URL+'/getuserorderlist/'+user_email);
     }
 
 }

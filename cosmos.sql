@@ -1159,7 +1159,6 @@ CREATE TABLE tbl_address (
     user_phone2 varchar2(200)
 );
 
-
 insert into tbl_user values(1, 'suovj140@gmail.com', 'rnwlgns2', '구지훈', '1993-06-15', '010-4474-9986','M',sysdate, 'costomer', null, null, null);
 insert into tbl_user values(2, 'test1@gmail.com', 'test1', 'test1', '1966-04-85', '010-4357-7979','W',sysdate, 'costomer', null, null, null);
 
@@ -1263,4 +1262,65 @@ group by product_id, product_title, product_content, product_price, product_gend
 update product set product_img = '이미지1.jpg,이미지2.jpg';
        
     
+commit;
+
+
+drop table tbl_order;
+receipt;
+
+-- 20210611
+-- 주문 테이블 
+
+
+create table tbl_order (
+    order_id     varchar2(50) not null,
+    user_email      VARCHAR2(200) not null,
+    address   varchar2(100) not null,
+    detailAddress varchar2(100) not null,
+    orderProductAmount number       not null,
+    total_price number not null,
+    order_status varchar2(20) default '배송준비중',
+    orderDate   Date default sysdate,   
+    primary key(order_Id)
+);
+
+select * from tbl_user;
+
+create table tbl_orderDetail (
+    orderDetailsNum number not null,
+    order_id     varchar2(50) not null,
+    product_seq number(20) not null,
+    money number       not null,
+    amount number not null,
+    primary key(orderDetailsNum)
+);
+create sequence tbl_order_details_seq;
+
+alter table tbl_orderDetail
+    add constraint tbl_order_detail_orderId foreign key(order_Id)
+    references tbl_order(order_id);
+alter table tbl_orderDetail
+    add constraint tbl_order_detail_product_seq foreign key(product_seq)
+    references product(product_seq);
+    
+    select * from tbl_order where user_email = 'suovj140@gmail.com';
+    
+select * from tbl_order;
+
+insert into tbl_order values('주문1', 'suovj140@gmail.com', '서울특별시 영등포구 당산동 121-289', '가온빌 701호', 2, 254000, '배송준비중', sysdate);
+insert into tbl_order values('주문2', 'suovj140@gmail.com', '서울특별시 영등포구 당산동 121-111', '가온빌 1101호', 3, 557000, '배송준비중', sysdate);
+insert into tbl_order values('주문3', 'suovj140@gmail.com', '서울특별시 영등포구 당산동 121-111', '가온빌 1101호', 3, 557000, '배송준비중', sysdate);
+insert into tbl_order values('주문4', 'suovj140@gmail.com', '서울특별시 영등포구 당산동 121-111', '가온빌 1101호', 3, 557000, '배송준비중', sysdate);
+insert into tbl_order values('주문5', 'suovj140@gmail.com', '서울특별시 영등포구 당산동 121-111', '가온빌 1101호', 3, 557000, '배송준비중', sysdate);
+insert into tbl_order values('주문6', 'suovj140@gmail.com', '서울특별시 영등포구 당산동 121-111', '가온빌 1101호', 3, 557000, '배송준비중', sysdate);
+insert into tbl_order values('주문7', 'suovj140@gmail.com', '서울특별시 영등포구 당산동 121-111', '가온빌 1101호', 3, 557000, '배송준비중', sysdate);
+insert into tbl_order values('주문8', 'suovj140@gmail.com', '서울특별시 영등포구 당산동 121-111', '가온빌 1101호', 3, 557000, '배송준비중', sysdate);
+insert into tbl_order values('주문9', 'suovj140@gmail.com', '서울특별시 영등포구 당산동 121-111', '가온빌 1101호', 3, 557000, '배송준비중', sysdate);
+insert into tbl_order values('주문10', 'suovj140@gmail.com', '서울특별시 영등포구 당산동 121-111', '가온빌 1101호', 3, 557000, '배송준비중', sysdate);
+insert into tbl_order values('주문11', 'suovj140@gmail.com', '서울특별시 영등포구 당산동 121-111', '가온빌 1101호', 3, 557000, '배송준비중', sysdate);
+insert into tbl_order values('주문12', 'suovj140@gmail.com', '서울특별시 영등포구 당산동 121-111', '가온빌 1101호', 3, 557000, '배송준비중', sysdate);
+insert into tbl_order values('주문13', 'suovj140@gmail.com', '서울특별시 영등포구 당산동 121-111', '가온빌 1101호', 3, 557000, '배송준비중', sysdate);
+insert into tbl_order values('주문14', 'suovj140@gmail.com', '서울특별시 영등포구 당산동 121-111', '가온빌 1101호', 3, 557000, '배송준비중', sysdate);
+
+
 commit;

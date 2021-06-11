@@ -46,8 +46,8 @@ function MemberInfoComponent(props) {
         ApiService.userAccount(user_email)
             .then( res => {
                 setuser_account(res.data);
-                console.log("man :"+man);
-                console.log("woman : "+woman);
+                // console.log("man :"+man);
+                // console.log("woman : "+woman);
                 checkGender()
             })
             .catch(err => {
@@ -60,7 +60,7 @@ function MemberInfoComponent(props) {
 
     // 업데이트 로직
     function updateButton(){
-        console.log(Change_user);
+        // console.log(Change_user);
         ApiService.updateUserInfo(Change_user);
         // alert('업데이트 성공');
         props.setState(10);
@@ -152,6 +152,8 @@ function MemberInfoComponent(props) {
 
         // 소득공제용 정보 변경 모달 띄우기
         setUpdateUserAccount(false);
+
+        props.setState(10);
     };
 
 
