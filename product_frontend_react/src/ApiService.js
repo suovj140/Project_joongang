@@ -65,8 +65,8 @@ class ApiService {
         return axios.post(USER_API_BASE_URL+'/useraddressbyseq/'+address_seq);
     }
 
-    UpdateUserAddress(useraddress){
-        return axios.post(USER_API_BASE_URL+'/updateuseraddress',useraddress);
+    UpdateUserAddress(userinfo){
+        return axios.post(USER_API_BASE_URL+'/updateuseraddress',userinfo);
     }
 
     deleteUserAddress(address_seq){

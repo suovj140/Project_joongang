@@ -13,8 +13,6 @@ import ModalInsertAddress from './ModalInsertAddressComponent';
 function AddressinfoComponent(props) {
 
     const [useraddresses,setuseraddresses] = useState([]);
-    const [postcode,setPostcode] = useState('');                  //우편번호
-    const [address,setAddress] = useState('');                  //주소
     const [isOpenUpdatePost, setIsOpenUpdatePost] = useState(false);
     const [isOpenPost, setIsOpenPost] = useState(false);
     const [isOpenInsertPost, setIsOpenInsertPost] = useState(false);
@@ -23,11 +21,13 @@ function AddressinfoComponent(props) {
     const [UserAddressBySeq, setUserAddressBySeq] = useState('');
     const [state, setState] = useState(0);
 
+    const [post_code,setPost_code] = useState('');                  //우편번호
+    const [address,setAddress] = useState('');                  //주소
     const [user_seq, setUser_seq] = useState(props.user.user_seq);
     const [user_email, setUser_email] = useState(props.user.user_email);
     const [address_phone, setAddress_phone] = useState(null);
     const [address_phone2, setAddress_phone2] = useState(null);
-    const [detailaddress, setDetailAddress] = useState(null);
+    const [detail_address, setDetail_Address] = useState(null);
     const [address_name, setAddress_name] = useState(null);
 
     const [changePostcode, setChangePostcode] = useState('');
@@ -39,6 +39,7 @@ function AddressinfoComponent(props) {
         .then( res => {
             setuseraddresses(res.data);
             setState(0);
+            console.log("회원 배송지 리스트 불러오기 : "+useraddresses);
             // console.log("state : " + state);
 
         })
@@ -93,12 +94,12 @@ function AddressinfoComponent(props) {
             setAddress_phone(e.target.value);
         }else if(e.target.name === "change_phone2"){
             setAddress_phone2(e.target.value);
-        }else if(e.target.name === "change_postcode"){
-            setPostcode(e.target.value);
+        }else if(e.target.name === "change_post_code"){
+            setPost_code(e.target.value);
         }else if(e.target.name === "change_address"){
             setAddress(e.target.value);
-        }else if(e.target.name === "change_detailaddress"){
-            setDetailAddress(e.target.value);
+        }else if(e.target.name === "change_detail_address"){
+            setDetail_Address(e.target.value);
         }else if(e.target.name === "change_address_name"){
             setAddress_name(e.target.value);
         }
@@ -145,20 +146,20 @@ function AddressinfoComponent(props) {
             fullAddress += (extraAddress !== '' ? ` (${extraAddress})` : '');
             }
 
-            const postcode = zonecode;
+            const post_code = zonecode;
             const address = fullAddress;
-            setPostcode(zonecode);
+            setPost_code(zonecode);
             setAddress(fullAddress);
             setState(5);
             const useraddress = {
                 // user_seq : user_seq,
                 address_seq : UserAddressBySeq.address_seq,
                 user_email : user_email,
-                post_code : postcode,
+                post_code : post_code,
                 address : address,
                 address_phone : address_phone,
                 address_phone2 : address_phone2,
-                detail_address : detailaddress,
+                detail_address : detail_address,
             }
 
             setIsOpenPost(false);
@@ -214,21 +215,20 @@ function AddressinfoComponent(props) {
             fullAddress += (extraAddress !== '' ? ` (${extraAddress})` : '');
             }
 
-            const postcode = zonecode;
+            const post_code = zonecode;
             const address = fullAddress;
-            setPostcode(zonecode);
+            setPost_code(zonecode);
             setAddress(fullAddress);
             setState(11);
 
             const useraddress = {
-                // user_seq : user_seq,
                 address_seq : UserAddressBySeq.address_seq,
                 user_email : user_email,
-                post_code : postcode,
+                post_code : post_code,
                 address : address,
                 address_phone : address_phone,
                 address_phone2 : address_phone2,
-                detail_address : detailaddress,
+                detail_address : detail_address,
             }
 
             setIsOpenInsertPost(false);
@@ -322,8 +322,8 @@ function AddressinfoComponent(props) {
                 {isOpenPost && <ModalKAKAOPost isOpenPost={isOpenPost} setIsOpenPost={setIsOpenPost} handleClose={handleClose} user_email={user_email} setOpenDetailAddress={setOpenDetailAddress} seachAddress={seachAddress}/>}
                 {isOpenInsertPost && <ModalKAKAOInsertPost isOpenInsertPost={isOpenInsertPost} setIsOpenInsertPost={setIsOpenInsertPost} handleClose={handleClose} searchAddress={searchAddress} UserAddressBySeq={UserAddressBySeq}/>}
                 {isOpenUpdatePost && <ModalUpdateAddress isOpenUpdatePost={isOpenUpdatePost} handleClose={handleClose} UserAddressBySeq={UserAddressBySeq} toggleNav={toggleNav} onChange={onChange} onNextButton={onNextButton}/>}
-                {openDetailAddress && <ModalDetailAddress openDetailAddress={openDetailAddress} UserAddressBySeq={UserAddressBySeq} handleClose={handleClose} postcode={postcode} address={address} toggleNav={toggleNav} address_phone2={address_phone2}  onChange={onChange} detailaddress={detailaddress} postcode={postcode} address={address} address_phone={address_phone} address_name={address_name}/>}
-                {openInsertAddress && <ModalInsertAddress openInsertAddress={openInsertAddress} UserAddressBySeq={UserAddressBySeq} handleClose={handleClose} postcode={postcode} address={address} toggleInsertNav={toggleInsertNav} address_phone2={address_phone2}  onChange={onChange} detailaddress={detailaddress} postcode={postcode} address={address} address_phone={address_phone} address_name={address_name} user_email={user_email} user_seq={user_seq} setState={setState}/>}
+                {openDetailAddress && <ModalDetailAddress openDetailAddress={openDetailAddress} UserAddressBySeq={UserAddressBySeq} handleClose={handleClose} post_code={post_code} address={address} toggleNav={toggleNav} address_phone2={address_phone2}  onChange={onChange} detail_address={detail_address} address_phone={address_phone} address_name={address_name}/>}
+                {openInsertAddress && <ModalInsertAddress openInsertAddress={openInsertAddress} UserAddressBySeq={UserAddressBySeq} handleClose={handleClose} post_code={post_code} address={address} toggleInsertNav={toggleInsertNav} address_phone2={address_phone2}  onChange={onChange} detail_address={detail_address} address_phone={address_phone} address_name={address_name} user_email={user_email} setState={setState}/>}
             </div>
         </Grid>
         </>

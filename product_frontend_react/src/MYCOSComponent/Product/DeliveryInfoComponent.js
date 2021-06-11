@@ -110,9 +110,9 @@ const columns = [
                         return (
                         <TableRow hover role="checkbox" tabIndex={-1} key={order.order_id} >
                             <TableCell style={{border:'0px'}}>{order.order_id}</TableCell>
-                            <TableCell style={{border:'0px'}}>{order.orderdate}</TableCell>
+                            <TableCell style={{border:'0px'}}>{order.order_date}</TableCell>
                             <TableCell style={{border:'0px'}}>{order.order_status}</TableCell>
-                            <TableCell style={{border:'0px'}}>총 금액 : {order.total_price}, {order.orderproductamount}개 상품</TableCell>
+                            <TableCell style={{border:'0px'}}>총 금액 : {order.total_price}, {order.order_product_amount}개 상품</TableCell>
                             <TableCell style={{textAlign:'right', border:'0px'}}>
                                 <Button style={button1}>주문상세</Button>
                                 <Button style={button2}>취소</Button>

@@ -18,9 +18,9 @@ public class UserVO {
         // 유저 주소 리스트 출력
         private int address_seq;
         private String address_name;
-        private String postcode;
+        private String post_code;
         private String address;
-        private String detailaddress;
+        private String detail_address;
         private String address_phone;
         private String address_phone2;
 

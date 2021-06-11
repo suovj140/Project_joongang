@@ -40,7 +40,7 @@ function ModalDetailAddressComponent(props) {
               detail_address : props.detail_address,
               address_name : props.address_name,
           }
-        //   console.log(user_info);
+          console.log(user_info);
           ApiService.UpdateUserAddress(user_info);
           props.handleClose();
           
@@ -85,13 +85,6 @@ function ModalDetailAddressComponent(props) {
                                 <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'290px', marginBottom:'10px'}} type="email" name="change_detail_address" onChange={props.onChange}/>
                             </div>
                         </div>
-                        
-                        {/* <button onClick={()=>console.log(UserAddress.user_email)}>이메일</button>
-                        <button onClick={()=>console.log(UserAddress.user_phone)}>폰</button>
-                        <button onClick={()=>console.log(props.postcode)}>우편</button>
-                        <button onClick={()=>console.log(props.address)}>주소</button>
-                        <button onClick={()=>console.log(props.user_phone2)}>폰2</button>
-                        <button onClick={()=>console.log(props.detailaddress)}>주소2</button> */}
 
                         <Button style={{backgroundColor:'#444', width:'148px', height:'30px', borderRadius:'0px', marginBottom:'0px', boxShadow:'none', fontSize:'13px', color:'white', border:'0px'}} onClick={() => submit()}>확인</Button>
                         <Button style={{backgroundColor:'white', width:'148px', height:'30px', borderRadius:'0px', marginLeft:'10px',marginBottom:'0px', boxShadow:'none', fontSize:'13px', color:'#444', border:'1px solid gray'}} onClick={() => props.handleClose()}>취소</Button>

@@ -106,9 +106,9 @@ public class UserController {
         System.out.println("PHONE : "+userVO.getUser_phone());
         System.out.println("ADDRESS_NAME : "+userVO.getAddress_name());
         System.out.println("PHONE2 : "+userVO.getAddress_phone2());
-        System.out.println("POSTCODE : "+userVO.getPostcode());
+        System.out.println("POST_CODE : "+userVO.getPost_code());
         System.out.println("ADDRESS : "+userVO.getAddress());
-        System.out.println("DETAILADDRESS : "+userVO.getDetailaddress());
+        System.out.println("DETAIL_ADDRESS : "+userVO.getDetail_address());
         userService.UpdateUserAddress(userVO);
     }
 
@@ -126,9 +126,9 @@ public class UserController {
         System.out.println("PHONE : "+userVO.getUser_phone());
         System.out.println("ADDRESS_NAME : "+userVO.getAddress_name());
         System.out.println("PHONE2 : "+userVO.getAddress_phone2());
-        System.out.println("POSTCODE : "+userVO.getPostcode());
+        System.out.println("POSTCODE : "+userVO.getPost_code());
         System.out.println("ADDRESS : "+userVO.getAddress());
-        System.out.println("DETAILADDRESS : "+userVO.getDetailaddress());
+        System.out.println("DETAILADDRESS : "+userVO.getDetail_address());
         userService.InsertUserAddress(userVO);
     }
 }
