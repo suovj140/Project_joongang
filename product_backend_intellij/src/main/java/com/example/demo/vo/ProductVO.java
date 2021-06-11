@@ -52,6 +52,7 @@ public class ProductVO {
         for(String i : colors){
             colorSet.add(i);
         }
+        this.product_color = product_color;
     }
 
     public void setProduct_size(String product_size) {

@@ -12,7 +12,7 @@
 
     <!-- 해당 유저의 배송지 리스트 출력 -->
     <select id="UserAddressList" resultType="com.example.demo.vo.UserVO" parameterType="String">
-        select * from tbl_address where user_email = #{user_email}
+        select * from tbl_address_info where user_email = #{user_email}
     </select>
 
     <!-- 해당 유저의 정보 변경 -->
@@ -38,7 +38,7 @@
             {call
                 declare
                 begin
-                    delete from tbl_address where user_email = #{user_email};
+                    delete from tbl_address_info where user_email = #{user_email};
                     delete from tbl_user where user_email = #{user_email};
                 end
             }
@@ -66,25 +66,25 @@
     </update>
 
     <select id="GetUserAddressBySeq" parameterType="int" resultType="com.example.demo.vo.UserVO">
-        select * from tbl_address where address_seq = #{address_seq}
+        select * from tbl_address_info where address_seq = #{address_seq}
     </select>
 
     <update id="UpdateUserAddress" parameterType="com.example.demo.vo.UserVO">
-        update tbl_address set postcode = #{postcode}, address = #{address}, user_phone = #{user_phone}, user_phone2 = #{user_phone2}, detailaddress = #{detailaddress}, address_name = #{address_name} where address_seq = #{address_seq}
+        update tbl_address_info set postcode = #{postcode}, address = #{address}, user_phone = #{user_phone}, user_phone2 = #{user_phone2}, detailaddress = #{detailaddress}, address_name = #{address_name} where address_seq = #{address_seq}
     </update>
 
     <delete id="DeleteUserAddress" parameterType="int">
-        delete tbl_address where address_seq = #{address_seq}
+        delete tbl_address_info where address_seq = #{address_seq}
     </delete>
 
     <insert id="InsertUserAddress" parameterType="com.example.demo.vo.UserVO">
-        insert into tbl_address (address_seq, user_seq, user_email, address_name, postcode, address, detailaddress, user_phone
-        <if test="user_phone2 != null">
-            , user_phone2
+        insert into tbl_address_info (address_seq, user_email, address_name, postcode, address, detailaddress, address_phone
+        <if test="address_phone2 != null">
+            , address_phone2
         </if>
-        ) values(tbl_address_seq.nextval, #{user_seq}, #{user_email}, #{address_name}, #{postcode}, #{address}, #{detailaddress}, #{user_phone}
-        <if test="user_phone2 != null">
-            , #{user_phone2}
+        ) values(tbl_address_info_seq.nextval, #{user_email}, #{address_name}, #{postcode}, #{address}, #{detailaddress}, #{address_phone}
+        <if test="address_phone2 != null">
+            , #{address_phone2}
         </if>
         )
     </insert>

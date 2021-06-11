@@ -51,7 +51,7 @@ function ModalDetailAddressComponent(props) {
                             <div style={{fontSize:'11px', color:'gray', textAlign:'left', marginBottom:'15px'}}>"-" 없이 숫자만 입력해 주세요.(선택)</div> */}
                             
                             <div style={{fontSize:'11px', color:'black', textAlign:'left', marginBottom:'5px'}}>배송지주소</div>
-                            <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'175px', marginBottom:'15px'}} type="email" value={UserAddress.postcode} name="change_postcode" onChange={props.onChange}/>
+                            <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'175px', marginBottom:'15px'}} type="email" value={UserAddress.post_code} name="change_post_code" onChange={props.onChange}/>
                             <Button style={{backgroundColor:'#444', width:'105px', height:'30px', borderRadius:'0px', marginLeft:'10px',marginBottom:'0px', boxShadow:'none', fontSize:'13px', color:'white'}} onClick={() => props.toggleNav()}>찾기</Button>
                             
                             <div>
@@ -59,7 +59,7 @@ function ModalDetailAddressComponent(props) {
                             </div>
                             
                             <div>
-                                <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'290px', marginBottom:'10px'}} type="email" value={UserAddress.detailaddress} name="change_detailaddress" onChange={props.onChange}/>
+                                <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'290px', marginBottom:'10px'}} type="email" value={UserAddress.detail_address} name="change_detail_address" onChange={props.onChange}/>
                             </div>
                             <Button style={{backgroundColor:'#444', width:'148px', height:'30px', borderRadius:'0px', marginBottom:'0px', boxShadow:'none', fontSize:'13px', color:'white', border:'0px'}} onClick={() => props.onNextButton()}>전부 다시 입력하기</Button>
                         </div>

@@ -153,6 +153,10 @@ function MemberInfoComponent(props) {
         // 소득공제용 정보 변경 모달 띄우기
         setUpdateUserAccount(false);
 
+        setOpenInsertUserAccountPAY(false);
+
+        setOpenUpdateUserRepay(false);
+
         props.setState(10);
     };
 
@@ -219,7 +223,7 @@ function MemberInfoComponent(props) {
                     <div style={centerDiv}>
                         <div style={centerDivBetween}>
                             <div style={centerLabel}>이메일 주소</div>
-                            <div><button name="change_email" onClick={handleOpen} style={{border:'0px', fontSize:'12px', borderRadius:'0px', color:'gray', backgroundColor:'white'}}>변경하기</button></div>
+                            {/* <div><button name="change_email" onClick={handleOpen} style={{border:'0px', fontSize:'12px', borderRadius:'0px', color:'gray', backgroundColor:'white'}}>변경하기</button></div> */}
                         </div>
 
                         <div style={{textAlign:'left'}}><input disabled style={centerInput} value={user_email}></input></div>

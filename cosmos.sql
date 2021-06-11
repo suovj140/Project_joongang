@@ -1324,3 +1324,83 @@ insert into tbl_order values('주문14', 'suovj140@gmail.com', '서울특별시 영등포�
 
 
 commit;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- 테이블 모두 변경
+
+SELECT * FROM tbl_user WHERE user_email = 'suovj140@gmail.com';
+select * from tbl_address where user_email = 'suovj140@gmail.com';
+
+
+
+CREATE TABLE tbl_user (
+    user_email VARCHAR2(100) primary key, -- 이메일,
+    user_password VARCHAR2(100), -- 비밀번호,
+    user_name VARCHAR2(50), -- 이름,
+    user_birthday VARCHAR2(100) , -- 생년월일,
+    user_phone VARCHAR2(100) , -- 핸드폰,
+    user_gender VARCHAR2(20) , --성별
+    user_regdate VARCHAR2(50), -- 가입일자,
+    user_role NUMBER, -- 고객권한
+    user_bank varchar2(20), --은행 
+    user_account varchar2(100), --계좌번호
+    user_repay varchar2(100) -- 소득공제용 정보
+);
+
+
+insert into tbl_user values('suovj140@gmail.com', 'rnwlgns2', '구지훈', '1993-06-15', '010-4474-9986','M', '2021-06-11', 0, null, null, null);
+insert into tbl_user values('test1@gmail.com', 'test1', 'test1', '1966-04-85', '010-4357-7979','W',sysdate, 1, null, null, null);
+
+commit;
+
+drop table tbl_user;
+drop table tbl_address;
+
+
+
+
+CREATE TABLE tbl_address_info (
+    address_seq number(20) primary key,
+    user_email VARCHAR2(100) not null, -- 이메일
+    constraints user_email foreign key(user_email) references tbl_user(user_email),
+    post_code varchar2(100) NULL, -- 우편번호,
+    address VARCHAR2(200) NULL, -- 주소,
+    detail_address VARCHAR2(200) NULL, -- 상세주소
+    address_name varchar2(100) not null,
+    address_phone varchar2(100) not null,
+    address_phone2 varchar2(100)
+);
+
+
+insert into tbl_address_info values(1, 'suovj140@gmail.com', '내집', '95554', '서울특별시 영등포구 당산동 121-289', '가온빌 701호', '010-4474-9986', null);
+insert into tbl_address_info values(2, 'suovj140@gmail.com', '본가', '95554', '서울특별시 마포구 이대', '학원 301호', '010-4444-7897', null);
+insert into tbl_address_info values(3, 'suovj140@gmail.com', '자취방', '95554', '서울특별시 서초구 고터', '고터 1층', '010-0044-4979', null);
+insert into tbl_address_info values(4, 'suovj140@gmail.com', '친구집', '95554', '서울특별시 어딘가 여기', '아파트 44층', '010-4949-7797', null);
+
+
+insert into tbl_address_info values(5, 'test1@gmail.com', '어딘가1', 54354, '이세상 어딘가 1', '여긴어디니', '010-0000-0000', null);
+insert into tbl_address_info values(6, 'test1@gmail.com', '어딘가2', 46748, '이세상은 맞냐', '어딘지몰라', '010-0000-0000', null);
+
+
+
+commit;
+
+select * from tbl_user;
+
+drop sequence tbl_address_seq;
+
+create sequence tbl_address_info_seq;
+
