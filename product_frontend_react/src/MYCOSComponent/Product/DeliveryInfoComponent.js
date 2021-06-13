@@ -51,7 +51,7 @@ const columns = [
       boxShadow:'0px',
     },
     container: {
-      maxHeight: 440,
+      maxHeight: 700,
       border:'0px',
       
     },
@@ -87,6 +87,10 @@ const columns = [
       setPage(0);
     };
   
+    function selectOrderInfo(order_id){
+      
+    }
+
     return (
     <Grid item xs={6} sm={9}>
         <Paper className={classes.root}>
@@ -112,9 +116,9 @@ const columns = [
                             <TableCell style={{border:'0px'}}>{order.order_id}</TableCell>
                             <TableCell style={{border:'0px'}}>{order.order_date}</TableCell>
                             <TableCell style={{border:'0px'}}>{order.order_status}</TableCell>
-                            <TableCell style={{border:'0px'}}>총 금액 : {order.total_price}, {order.order_product_amount}개 상품</TableCell>
+                            <TableCell style={{border:'0px'}}>총 금액 : {order.total_price}원, {order.order_product_amount}개 상품</TableCell>
                             <TableCell style={{textAlign:'right', border:'0px'}}>
-                                <Button style={button1}>주문상세</Button>
+                                <Button style={button1} onClick={() => selectOrderInfo(order.order_id)}>주문상세</Button>
                                 <Button style={button2}>취소</Button>
                             </TableCell>
                         </TableRow>

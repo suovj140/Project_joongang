@@ -1387,14 +1387,14 @@ CREATE TABLE tbl_address_info (
 );
 
 
-insert into tbl_address_info values(1, 'suovj140@gmail.com', '내집', '95554', '서울특별시 영등포구 당산동 121-289', '가온빌 701호', '010-4474-9986', null);
-insert into tbl_address_info values(2, 'suovj140@gmail.com', '본가', '95554', '서울특별시 마포구 이대', '학원 301호', '010-4444-7897', null);
-insert into tbl_address_info values(3, 'suovj140@gmail.com', '자취방', '95554', '서울특별시 서초구 고터', '고터 1층', '010-0044-4979', null);
-insert into tbl_address_info values(4, 'suovj140@gmail.com', '친구집', '95554', '서울특별시 어딘가 여기', '아파트 44층', '010-4949-7797', null);
+insert into tbl_address_info values(tbl_address_info_seq.nextval, 'suovj140@gmail.com', '95554', '서울특별시 영등포구 당산동 121-289', '가온빌 701호', '내집',   '010-4474-9986', null);
+insert into tbl_address_info values(2, 'suovj140@gmail.com', '95554', '서울특별시 마포구 이대', '학원 301호', '본가',   '010-4444-7897', null);
+insert into tbl_address_info values(3, 'suovj140@gmail.com', '95554', '서울특별시 서초구 고터', '고터 1층', '자취방',   '010-0044-4979', null);
+insert into tbl_address_info values(4, 'suovj140@gmail.com', '95554', '서울특별시 어딘가 여기', '아파트 44층', '친구집',   '010-4949-7797', null);
 
 
-insert into tbl_address_info values(5, 'test1@gmail.com', '어딘가1', 54354, '이세상 어딘가 1', '여긴어디니', '010-0000-0000', null);
-insert into tbl_address_info values(6, 'test1@gmail.com', '어딘가2', 46748, '이세상은 맞냐', '어딘지몰라', '010-0000-0000', null);
+insert into tbl_address_info values(5, 'test1@gmail.com', '54354', '이세상 어딘가 1', '여긴어디니', '어딘가1',  '010-0000-0000', null);
+insert into tbl_address_info values(6, 'test1@gmail.com', '46748', '이세상은 맞냐', '어딘지몰라', '어딘가2',  '010-0000-0000', null);
 
 
 
@@ -1402,6 +1402,7 @@ commit;
 
 select * from tbl_user;
 select * from tbl_address_info;
+delete tbl_address_info;
 
 
 drop sequence tbl_address_seq;
@@ -1467,7 +1468,7 @@ create table tbl_order_detail (
     primary key(order_detail_num)
 );
 create sequence tbl_order_details_seq;
-
+create sequence tbl_address_info_seq;
 alter table tbl_order_detail
     add constraint tbl_order_detail_orderId foreign key(order_Id)
     references tbl_order(order_id);
@@ -1478,3 +1479,334 @@ alter table tbl_order_detail
     
     
 select * from tbl_order;
+
+commit;
+
+
+select * from product;
+
+update product set product_img = '이미지1.jpg';
+
+
+drop table product;
+drop table product_option;
+
+
+
+
+
+
+
+
+-- 2021 06 13 상품, 상품옵션테이블 변경
+
+
+select *
+from
+(select rownum rnum, p.*
+from
+(select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size, product_saled
+from
+product, (select product_option_id, sum(product_saled) product_saled from product_option group by product_option_id) where product_id = product_option_id
+group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img, product_saled) p);
+
+
+
+CREATE TABLE tbl_product (
+	product_seq NUMERIC NOT NULL, -- 상품번호,
+	product_id NUMERIC NOT NULL, -- 상품아이디,
+	product_title VARCHAR2(100) NOT NULL, -- 상품제목,
+	product_price NUMERIC NOT NULL, -- 상품가격,
+	product_img VARCHAR2(100) NOT NULL, -- 상품이미지,
+	product_size VARCHAR2(100) NULL, -- 상품사이즈,
+	product_color VARCHAR2(100) NULL, -- 상품컬러,
+	product_gender VARCHAR2(100) NOT NULL, -- 상품성별,
+	product_content VARCHAR2(100) NULL, -- 상품내용,
+	product_material VARCHAR2(100) NULL, -- 상품재질,
+	product_category VARCHAR2(50) NULL, -- 상품카테고리,
+	product_date VARCHAR2(30) NULL -- 상품등록날짜
+);
+
+-- 상품
+ALTER TABLE tbl_product
+	ADD CONSTRAINT PK_tbl_product -- 상품 기본키
+	PRIMARY KEY (
+		product_seq -- 상품번호
+	);
+    
+    
+    
+-- 상품옵션
+CREATE TABLE tbl_product_option (
+	product_seq NUMERIC NULL, -- 상품번호,
+	product_id NUMERIC NULL, -- 상품아이디,
+	product_stock NUMERIC NULL, -- 상품재고,
+	product_saled NUMERIC NULL -- 상품판매량
+);
+
+ALTER TABLE tbl_product_option
+	ADD CONSTRAINT fk_tbl_product_option foreign key(product_seq)-- 상품 기본키
+	references tbl_product(product_seq); -- 상품번호;
+    
+    
+    
+    
+select * from tbl_product;
+    
+    
+create sequence tbl_product_seq increment by 1 start with 0 minvalue 0;
+create sequence tbl_product_option_seq increment by 1 start with 0 minvalue 0;
+
+insert into tbl_product values(tbl_product_seq.nextval, 1, '아동상품1', 20000, '이미지4.jpg', 'XL','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 1, '아동상품1', 20000, '이미지4.jpg', 'L','WHITH','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 2, '아동상품2', 23000, '이미지4.jpg', 'XL','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 2, '아동상품2', 23000, '이미지4.jpg', 'L','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 3, '아동상품3', 25000, '이미지4.jpg', 'L','RED','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 3, '아동상품3', 25000, '이미지4.jpg', 'M','DARKRED','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 3, '아동상품3', 25000, '이미지4.jpg', 'S','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 3, '아동상품3', 25000, '이미지4.jpg', 'S','GREEN','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 3, '아동상품3', 25000, '이미지4.jpg', 'XS','YELLOW','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 4, '아동상품4', 19000, '이미지4.jpg', 'XL','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+
+insert into tbl_product values(tbl_product_seq.nextval, 5, '여성상품1', 20000, '이미지4.jpg', 'XL','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 5, '여성상품1', 20000, '이미지4.jpg', 'L','WHITH','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 6, '여성상품2', 23000, '이미지4.jpg', 'XL','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 6, '여성상품2', 23000, '이미지4.jpg', 'L','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 6, '여성상품2', 23000, '이미지4.jpg', 'L','RED','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 7, '여성상품3', 25000, '이미지4.jpg', 'M','DARKRED','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 7, '여성상품3', 25000, '이미지4.jpg', 'S','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 8, '여성상품4', 25000, '이미지4.jpg', 'S','GREEN','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 8, '여성상품4', 25000, '이미지4.jpg', 'XS','YELLOW','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 9, '여성상품5', 19000, '이미지4.jpg', 'XL','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+
+insert into tbl_product values(tbl_product_seq.nextval, 10, '남성상품1', 20000, '이미지4.jpg', 'XL','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 10, '남성상품1', 20000, '이미지4.jpg', 'L','WHITH','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 11, '남성상품2', 23000, '이미지4.jpg', 'XL','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 11, '남성상품2', 23000, '이미지4.jpg', 'L','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 12, '남성상품3', 25000, '이미지4.jpg', 'L','RED','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 12, '남성상품3', 25000, '이미지4.jpg', 'M','DARKRED','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 13, '남성상품4', 26000, '이미지4.jpg', 'S','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 13, '남성상품4', 26000, '이미지4.jpg', 'S','GREEN','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 13, '남성상품4', 26000, '이미지4.jpg', 'XS','YELLOW','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 13, '남성상품4', 26000, '이미지4.jpg', 'XL','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+
+insert into tbl_product values(tbl_product_seq.nextval, 14, '아동악세서리1', 20000, '이미지4.jpg', 'XL','BLACK','KIDS','아동상품입니다.','면','악세사리',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 14, '아동악세서리1', 20000, '이미지4.jpg', 'L','WHITH','KIDS','아동상품입니다.','면','악세사리',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 14, '아동악세서리1', 20000, '이미지4.jpg', 'XL','BLACK','KIDS','아동상품입니다.','면','악세사리',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 15, '아동악세서리2', 23000, '이미지4.jpg', 'L','BLACK','KIDS','아동상품입니다.','면','악세사리',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 15, '아동악세서리2', 23000, '이미지4.jpg', 'L','RED','KIDS','아동상품입니다.','면','악세사리',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 15, '아동악세서리2', 23000, '이미지4.jpg', 'M','DARKRED','KIDS','아동상품입니다.','면','악세사리',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 15, '아동악세서리2', 23000, '이미지4.jpg', 'S','BLACK','KIDS','아동상품입니다.','면','악세사리',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 16, '아동악세서리3', 25000, '이미지4.jpg', 'S','GREEN','KIDS','아동상품입니다.','면','악세사리',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 16, '아동악세서리3', 25000, '이미지4.jpg', 'XS','YELLOW','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 16, '아동악세서리3', 25000, '이미지4.jpg', 'XL','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+
+insert into tbl_product values(tbl_product_seq.nextval, 20, '여성악세서리1', 20000, '이미지4.jpg', 'XL','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 20, '여성악세서리1', 20000, '이미지4.jpg', 'L','WHITH','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 21, '여성악세서리2', 23000, '이미지4.jpg', 'XL','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 21, '여성악세서리2', 23000, '이미지4.jpg', 'L','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 22, '여성악세서리3', 25000, '이미지4.jpg', 'L','RED','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 22, '여성악세서리3', 25000, '이미지4.jpg', 'M','DARKRED','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 23, '여성악세서리4', 25000, '이미지4.jpg', 'S','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 23, '여성악세서리4', 25000, '이미지4.jpg', 'S','GREEN','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 23, '여성악세서리4', 25000, '이미지4.jpg', 'XS','YELLOW','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 24, '여성악세서리5', 19000, '이미지4.jpg', 'XL','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+
+insert into tbl_product values(tbl_product_seq.nextval, 25, '남성악세서리1', 20000, '이미지4.jpg', 'XL','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 25, '남성악세서리1', 20000, '이미지4.jpg', 'L','WHITH','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 26, '남성악세서리2', 23000, '이미지4.jpg', 'XL','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 26, '남성악세서리2', 23000, '이미지4.jpg', 'L','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 27, '남성악세서리3', 25000, '이미지4.jpg', 'L','RED','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 27, '남성악세서리3', 25000, '이미지4.jpg', 'M','DARKRED','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 27, '남성악세서리3', 25000, '이미지4.jpg', 'S','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 27, '남성악세서리3', 25000, '이미지4.jpg', 'S','GREEN','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 27, '남성악세서리3', 25000, '이미지4.jpg', 'XS','YELLOW','KIDS','아동상품입니다.','면','바지',SYSDATE);
+insert into tbl_product values(tbl_product_seq.nextval, 27, '남성악세서리3', 25000, '이미지4.jpg', 'XL','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
+
+
+update tbl_product set product_gender = 'W' where product_id between 20 and 24;
+update tbl_product set product_gender = 'M' where product_id between 25 and 27;
+update tbl_product set product_category = '악세사리' where product_id between 14 and 27;
+
+commit;
+
+
+DROP TABLE TBL_PRODUCT;
+drop table tbl_product_option;
+drop sequence tbl_product_seq;
+drop sequence tbl_product_option_seq;
+
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 1, 250, 10);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 1, 260, 300);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 2, 240, 800);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 2, 100, 100);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 3, 200, 10);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 3, 30, 20);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 3, 250, 30);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 3, 270, 70);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 3, 290, 500);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 4, 100, 900);
+
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 5, 250, 10);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 5, 260, 300);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 6, 240, 800);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 6, 100, 100);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 6, 200, 10);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 7, 30, 20);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 7, 250, 30);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 8, 270, 70);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 8, 290, 500);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 9, 100, 900);
+
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 10, 250, 10);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 10, 260, 300);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 11, 240, 800);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 11, 100, 100);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 12, 200, 10);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 12, 30, 20);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 13, 250, 30);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 13, 270, 70);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 13, 290, 500);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 13, 100, 900);
+
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 14, 250, 10);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 14, 260, 300);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 14, 240, 800);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 15, 100, 100);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 15, 200, 10);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 15, 30, 20);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 15, 250, 30);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 16, 270, 70);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 16, 290, 500);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 16, 100, 900);
+
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 20, 250, 10);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 20, 260, 300);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 21, 240, 800);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 21, 100, 100);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 22, 200, 10);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 22, 30, 20);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 23, 250, 30);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 23, 270, 70);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 23, 290, 500);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 24, 100, 900);
+
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 25, 250, 10);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 25, 260, 300);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 26, 240, 800);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 26, 100, 100);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 27, 200, 10);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 27, 30, 20);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 27, 250, 30);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 27, 270, 70);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 27, 290, 500);
+insert into tbl_product_option values(tbl_product_option_seq.nextval, 27, 100, 900);
+
+select * from tbl_product;
+
+select * from tbl_product_option;
+
+
+select *
+from
+(select rownum rnum, t.*
+from
+(select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size
+from
+tbl_product p, (select product_id, sum(product_saled) product_saled from tbl_product_option group by product_id) o where p.product_id = o.product_id
+group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img, product_saled) t);
+
+
+
+
+
+
+select *
+from
+(select rownum rnum, p.*
+from
+(select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size, product_saled
+from
+tbl_product, 
+(select product_id, sum(product_saled) product_saled from tbl_product_option group by product_id) o
+where tbl_product.product_id = o.product_id
+group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img, product_saled) p);
+
+select 
+p.product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size, sum(product_saled)
+from
+tbl_product p, (select product_id, sum(product_saled) product_saled from tbl_product_option group by product_id) o group by p.product_id, product_title, product_content, product_price, product_gender, product_category, product_img;
+
+
+
+select product_id, sum(product_saled) product_saled from tbl_product_option group by product_id;
+where tbl_product.product_id = o.product_id;
+
+
+
+
+
+
+
+commit;
+
+
+
+
+
+select max(rownum) from (select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size
+from tbl_product group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img) p;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+select *
+from
+(select rownum rnum, p.*
+from
+(select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size, product_saled
+from
+tbl_product, (select product_id product_option_id, sum(product_saled) product_saled from tbl_product_option group by product_id) where product_id = product_option_id
+group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img, product_saled) p);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+select * from tbl_order_detail;
+insert into tbl_order_detail values(1, '주문1', 1, 172000, 2);
+insert into tbl_order_detail values(2, '주문1', 7, 10000, 1);
+insert into tbl_order_detail values(3, '주문1', 8, 25000, 4);
+select * from tbl_order o, tbl_order_detail od where o.order_id = od.order_id;
+
+
+
+
+select * from tbl_order where order_id = '주문1';
+select * from tbl_order_detail od, tbl_product p where od.order_id = '주문1' and od.product_seq = p.product_seq;
+
+commit;
+
+
+

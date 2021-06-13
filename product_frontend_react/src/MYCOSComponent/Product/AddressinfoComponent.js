@@ -151,16 +151,16 @@ function AddressinfoComponent(props) {
             setPost_code(zonecode);
             setAddress(fullAddress);
             setState(5);
-            const useraddress = {
-                // user_seq : user_seq,
-                address_seq : UserAddressBySeq.address_seq,
-                user_email : user_email,
-                post_code : post_code,
-                address : address,
-                address_phone : address_phone,
-                address_phone2 : address_phone2,
-                detail_address : detail_address,
-            }
+            // const useraddress = {
+            //     // user_seq : user_seq,
+            //     address_seq : UserAddressBySeq.address_seq,
+            //     user_email : user_email,
+            //     post_code : post_code,
+            //     address : address,
+            //     address_phone : address_phone,
+            //     address_phone2 : address_phone2,
+            //     detail_address : detail_address,
+            // }
 
             setIsOpenPost(false);
             setIsOpenUpdatePost(false);
@@ -221,15 +221,15 @@ function AddressinfoComponent(props) {
             setAddress(fullAddress);
             setState(11);
 
-            const useraddress = {
-                address_seq : UserAddressBySeq.address_seq,
-                user_email : user_email,
-                post_code : post_code,
-                address : address,
-                address_phone : address_phone,
-                address_phone2 : address_phone2,
-                detail_address : detail_address,
-            }
+            // const useraddress = {
+            //     address_seq : UserAddressBySeq.address_seq,
+            //     user_email : user_email,
+            //     post_code : post_code,
+            //     address : address,
+            //     address_phone : address_phone,
+            //     address_phone2 : address_phone2,
+            //     detail_address : detail_address,
+            // }
 
             setIsOpenInsertPost(false);
         }     

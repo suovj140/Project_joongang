@@ -32,7 +32,7 @@ public class ProductController {
         System.out.println("SIZE : "+productVO.getSelect_size());
         System.out.println("KEYWORD : "+productVO.getSearch_keyword());
         System.out.println("OPTION : "+productVO.getSelect_option());
-
+        System.out.println(productService.productCategory(productVO));
         return productService.productCategory(productVO);
     }
 

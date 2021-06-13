@@ -15,7 +15,7 @@
         from
         (select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size
         from
-        product group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img) p) where product_id = #{product_id}
+        tbl_product group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img) p) where product_id = #{product_id}
     </select>
 
 
@@ -27,25 +27,25 @@
         from
         (select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size, product_saled
         from
-        product, (select product_option_id, sum(product_saled) product_saled from product_option group by product_option_id) where product_id = product_option_id
+        tbl_product, (select product_id product_option_id, sum(product_saled) product_saled from tbl_product_option group by product_id) where product_id = product_option_id
         group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img, product_saled) p
         <where>
-            <if test="search_keyword != null and product_gender != 'undefined'">
+            <if test="search_keyword != null">
                 and (product_title like '%'||#{search_keyword}||'%' or product_content like '%'||#{search_keyword}||'%' or product_category like '%'||#{search_keyword}||'%' or product_gender like '%'||#{search_keyword}||'%' or product_color like '%'||#{search_keyword}||'%' or product_size like '%'||#{search_keyword}||'%')
             </if>
-            <if test="product_gender != null and product_gender != 'undefined' and product_gender != 'null'">
+            <if test="product_gender != null and product_gender != 'null'">
                 and product_gender = #{product_gender}
             </if>
-            <if test="product_category != null and product_gender != 'undefined'">
+            <if test="product_category != null">
                 and product_category = #{product_category}
             </if>
             <if test="product_category == null">
                 and product_category != '악세사리'
             </if>
-            <if test="select_color != null and product_gender != 'undefined'">
+            <if test="select_color != null">
                 and product_color like '%'||#{select_color}||'%'
             </if>
-            <if test="select_size != null and product_gender != 'undefined'">
+            <if test="select_size != null">
                 and product_size like '%'||#{select_size}||'%'
             </if>
         </where>
@@ -76,7 +76,7 @@
     <!-- 페이지 번호 출력 -->
     <select id="findPageNum" parameterType="com.example.demo.vo.ProductVO" resultType="int">
         select max(rownum) from (select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size
-        from product group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img) p
+        from tbl_product group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img) p
         <where>
             <if test="search_keyword != null">
                 and (product_title like '%'||#{search_keyword}||'%' or product_content like '%'||#{search_keyword}||'%' or product_category like '%'||#{search_keyword}||'%' or product_gender like '%'||#{search_keyword}||'%' or product_color like '%'||#{search_keyword}||'%' or product_size like '%'||#{search_keyword}||'%')
