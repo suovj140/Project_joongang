@@ -67,6 +67,7 @@ const columns = [
         .then( res => {
             setOrderList(res.data);
             console.log(orderList);
+            console.log(orderList.length);
         })
         .catch(err => {
             console.log('product_list print error!', err);
@@ -97,6 +98,7 @@ const columns = [
             <TableContainer className={classes.container}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
+                    
                     <TableRow>
                         {columns.map((column) => (
                         <TableCell
@@ -110,7 +112,7 @@ const columns = [
                     </TableRow>
                     </TableHead>
                     <TableBody>
-                    {orderList.map((order) => {
+                    {orderList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((order) => {
                         return (
                         <TableRow hover role="checkbox" tabIndex={-1} key={order.order_id} >
                             <TableCell style={{border:'0px'}}>{order.order_id}</TableCell>
