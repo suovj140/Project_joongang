@@ -59,8 +59,10 @@ function ModalDeleteUserComponent(props) {
                         ※ 진행중인 주문, 반품이 있을 시 회원 탈퇴가 불가능 합니다. 해당 사항을 완료 후 탈퇴를 하실 수 있습니다.<br/>
                         </div>
                         <div style={{marginTop:'50px', marginBottom:'50px'}}></div>
-                        <button variant="contained" style={{backgroundColor:'white', width:'200px', height:'40px', borderRadius:'0px', marginBottom:'10px', boxShadow:'none', fontSize:'13px', border:'1px solid lightgray', marginRight:'10px'}} onClick={props.handleClose}>취소</button>
-                        <button variant="contained" style={{backgroundColor:'#444', width:'200px', height:'40px', borderRadius:'0px', marginBottom:'10px', boxShadow:'none', fontSize:'13px', color:'white', border:'0px'}} name='recheck_user_delete' onClick={props.handleOpen}>회원 탈퇴</button><br/>
+                        <div style={{display:'flex', justifyContent:'center'}}>
+                            <button variant="contained" style={{backgroundColor:'white', width:'200px', height:'40px', borderRadius:'0px', marginBottom:'10px', boxShadow:'none', fontSize:'13px', border:'1px solid lightgray', marginRight:'10px'}} onClick={props.handleClose}>취소</button>
+                            <button variant="contained" style={{backgroundColor:'#444', width:'200px', height:'40px', borderRadius:'0px', marginBottom:'10px', boxShadow:'none', fontSize:'13px', color:'white', border:'0px'}} name='recheck_user_delete' onClick={props.handleOpen}>회원 탈퇴</button><br/>
+                        </div>
                     </div>
                 </Fade>
             </Modal>
