@@ -265,7 +265,7 @@ function AddressinfoComponent(props) {
 
     return (
         <>
-        <Grid item xs={6} sm={7}>
+        <Grid item xs={6} sm={8}>
             <div style={{display:'flex', justifyContent:'space-between'}}>
                 <div style={{fontSize:'13px', textAlign:'left', marginBottom:'20px'}}>배송지 정보</div><div style={{fontSize:'13px', textAlign:'left', marginBottom:'20px'}}>
                     <Button style={{fontSize:'13px', padding:'0px'}} onClick={() => AddressAdd()}>배송지 추가</Button>

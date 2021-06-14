@@ -216,7 +216,7 @@ function MemberInfoComponent(props) {
 
     return (
         <>
-           <Grid item xs={6} sm={7}>
+           <Grid item xs={6} sm={8}>
                     <div style={{fontSize:'13px', textAlign:'left'}}>회원정보변경</div>
                     <hr style={{height:'1px', backgroundColor:'lightgray', border:'0px', opacity:'70%', margin:'20px 0px 20px 0px', paddingBottom:'0px'}}/>
 

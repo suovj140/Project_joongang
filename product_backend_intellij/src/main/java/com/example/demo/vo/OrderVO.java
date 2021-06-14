@@ -16,4 +16,5 @@ public class OrderVO {
         private String order_status;
         private String order_date;
         private String user_name;
+        private String pay_info;
 }

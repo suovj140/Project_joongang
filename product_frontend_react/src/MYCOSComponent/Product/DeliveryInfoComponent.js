@@ -96,7 +96,7 @@ const columns = [
     }
 
     return (
-    <Grid item xs={6} sm={9}>
+    <Grid item xs={6} sm={8}>
         <Paper className={classes.root}>
             <TableContainer className={classes.container}>
                 <Table stickyHeader aria-label="sticky table">
