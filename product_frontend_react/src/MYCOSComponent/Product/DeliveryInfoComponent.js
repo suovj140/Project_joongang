@@ -74,14 +74,14 @@ const columns = [
         ApiService.selectOrderInfo(order_id)
             .then( res => {
             setOrderInfo(res.data);
-            console.log(orderInfo);
+            // console.log(orderInfo);
         })
 
         // 해당 order_id로 product, order_detail을 조인해서 조회하기
         ApiService.selectOrderDetailInfo(order_id)
             .then( res => {
             setOrderDetailInfo(res.data);
-            console.log(orderDetailInfo);
+            // console.log(orderDetailInfo);
         })
     }
       
@@ -89,8 +89,10 @@ const columns = [
         if(order_status === '배송준비중'){
             ApiService.returnOrder(order_id);
             alert('주문 취소 요청 됐습니다.');
-        }else{
+        }else if(order_status === '취소요청'){
             alert('이미 주문취소 요청을 했습니다.');
+        }else if(order_status === '취소완료'){
+            alert('이미 취소완료된 주문입니다.')
         }
         setState(2);
     }

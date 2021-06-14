@@ -85,7 +85,7 @@ function ModalDetailAddressComponent(props) {
                                     <div><b>받는사람 정보</b></div>
                                     <hr style={{height:'2px', border:'0px', backgroundColor:'black', marginTop:'15px', marginBottom:'15px'}}/>
                                     <div style={{display:'flex'}}>
-                                        <Grid item xs={6} sm={2} style={{minWidth:'120px'}}>
+                                        <Grid item xs={6} sm={2} style={{minWidth:'120px', marginBottom:'5px'}}>
                                             <div>받는사람</div>
                                         </Grid>
                                         <Grid item xs={6} sm={10}>
@@ -106,7 +106,7 @@ function ModalDetailAddressComponent(props) {
                                     <div><b>결제 정보</b></div>
                                     <hr style={{height:'2px', border:'0px', backgroundColor:'black', marginTop:'15px', marginBottom:'15px'}}/>
                                     <div style={{display:'flex'}}>
-                                        <Grid item xs={6} sm={2} style={{minWidth:'120px'}}>
+                                        <Grid item xs={6} sm={2} style={{minWidth:'120px', marginBottom:'5px'}}>
                                             <div>결제수단</div>
                                         </Grid>
                                         <Grid item xs={6} sm={10}>

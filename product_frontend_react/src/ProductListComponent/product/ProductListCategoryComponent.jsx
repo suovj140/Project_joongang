@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import ApiService from "../../ApiService";
-import img01 from '../images/01.jpg';
+import img01 from '../images/01_pre.jpg';
 import { Link } from 'react-router-dom';
 import SelectOptionComponenttest from './SelectOptionComponent';
 import SortByComponent from './SortByComponent';
@@ -149,7 +149,7 @@ function ProductListComponent(props){
                         <div align="right" onClick = {() => {Productinfo(product.product_id)}}>
                             <TableRow key={product.product_id}>
                                 <TableCell component="th" scope="product" style={{border:'0px', padding:'0px'}}> 
-                                    <img src={imgUrl+product.imgs[0]} style={{width:'100%', objectFit: 'cover'}}/>
+                                    <img /*src={img01}*/src={imgUrl+product.imgs[0]} style={{width:'100%'}}/>
                                 </TableCell>
                             </TableRow>
                             <TableRow>

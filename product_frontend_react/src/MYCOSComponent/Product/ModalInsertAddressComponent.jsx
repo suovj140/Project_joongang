@@ -69,17 +69,17 @@ function ModalDetailAddressComponent(props) {
                             <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'285px', marginBottom:'15px'}} type="email" value={props.user_email} name="change_email" onChange={props.onChange} disabled/>
 
                             <div style={{fontSize:'11px', color:'black', textAlign:'left', marginBottom:'5px'}}>휴대폰 번호</div>
-                            <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'285px', marginBottom:'5px'}} type="email" value={props.address_phone} name="change_phone" onChange={props.onChange}/>
+                            <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'285px', marginBottom:'5px'}} type="email" name="change_phone" onChange={props.onChange}/>
                             <div style={{fontSize:'11px', color:'gray', textAlign:'left', marginBottom:'15px'}}>"-" 없이 숫자만 입력해 주세요.</div>
 
                             <div style={{fontSize:'11px', color:'black', textAlign:'left', marginBottom:'5px'}}>받는 사람</div>
-                            <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'285px', marginBottom:'15px'}} type="email" value={props.user_name} name="change_user_name" onChange={props.onChange}/>
+                            <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'285px', marginBottom:'15px'}} type="email" name="change_user_name" onChange={props.onChange}/>
 
                             <div style={{fontSize:'11px', color:'black', textAlign:'left', marginBottom:'5px'}}>주소 이름</div>
-                            <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'285px', marginBottom:'15px'}} type="email" value={props.address_name} name="change_address_name" onChange={props.onChange}/>
+                            <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'285px', marginBottom:'15px'}} type="email" name="change_address_name" onChange={props.onChange}/>
 
                             <div style={{fontSize:'11px', color:'black', textAlign:'left', marginBottom:'5px'}}>추가 연락처</div>
-                            <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'285px', marginBottom:'5px'}} type="email" value={props.address_phone2} name="change_phone2" onChange={props.onChange}/>                            
+                            <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'285px', marginBottom:'5px'}} type="email" name="change_phone2" onChange={props.onChange}/>                            
                             <div style={{fontSize:'11px', color:'gray', textAlign:'left', marginBottom:'15px'}}>"-" 없이 숫자만 입력해 주세요.(선택)</div>
                             
                             <div style={{fontSize:'11px', color:'black', textAlign:'left', marginBottom:'5px'}}>배송지주소</div>

@@ -1801,12 +1801,28 @@ insert into tbl_order_detail values(3, '주문1', 8, 25000, 4);
 select * from tbl_order o, tbl_order_detail od where o.order_id = od.order_id;
 
 
-
+alter table tbl_order add pay_info varchar2(100);
+update tbl_order set pay_info = '카카오페이';
 
 select * from tbl_order where order_id = '주문1';
-select * from tbl_order_detail od, tbl_product p where od.order_id = '주문1' and od.product_seq = p.product_seq;
+select p.*, od.order_id, od.money, od.amount from tbl_order_detail od, tbl_product p where od.order_id = '주문1' and od.product_seq = p.product_seq;
 
 commit;
 
 
+-- 20210614 아침시작
+select * from tbl_user;
+select * from tbl_address_info;
+select * from tbl_product;
+select * from tbl_product_option;
+select * from tbl_order;
+select * from tbl_order_detail;
+insert into tbl_order_detail values(4, '주문2', 3, 27560, 3);
+insert into tbl_order_detail values(5, '주문2', 1, 2550, 7);
+insert into tbl_order_detail values(6, '주문3', 2, 277760, 2);
+insert into tbl_order_detail values(7, '주문3', 7, 2990, 1);
+insert into tbl_order_detail values(8, '주문3', 10, 23000, 3);
 
+alter table tbl_address_info add user_name varchar2(100) not null;
+alter table tbl_order add user_name varchar2(100);
+update tbl_order set user_name = '후니택배';
