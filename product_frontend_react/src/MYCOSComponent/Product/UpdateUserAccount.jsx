@@ -1,5 +1,5 @@
-import React, {useState,useEffect} from 'react';
-import {Table, TableBody, TableCell, TableHead, TableRow, Grid, Button} from '@material-ui/core';
+import React, {useState} from 'react';
+import {Button} from '@material-ui/core';
 import ApiService from '../../ApiService';
 
 function UpdateUserAccount(props) {
@@ -18,7 +18,7 @@ function UpdateUserAccount(props) {
             user_name : user_name,
             user_email : user_email,
         }
-        console.log(userAccount);
+        // console.log(userAccount);
         if(userAccount.user_bank === null | userAccount.user_account === null){
             alert('은행과 계좌번호를 확인해주세요.');
         }else{

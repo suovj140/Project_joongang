@@ -14,7 +14,6 @@ function ManagerPage() {
     const [deliveryinfo, setDeliveryinfo] = useState(false);
     const [addressinfo, setAddressinfo] = useState(false);
     const [dashBoard, setDashBoard] = useState(true);
-    const [productDetail, setProductDetail] = useState(false);
     const [sidebarshow, setSidebarshow] = useState(false);
 
     const memberinfoOpen = ()=>{
@@ -22,7 +21,6 @@ function ManagerPage() {
         setDeliveryinfo(false);
         setAddressinfo(false);
         setDashBoard(false);
-        setProductDetail(false);
     }
 
     const deliveryinfoOpen= ()=>{
@@ -30,7 +28,6 @@ function ManagerPage() {
         setMemberinfo(false);
         setAddressinfo(false);
         setDashBoard(false);
-        setProductDetail(false);
     }
 
     const addressinfoOpen= ()=>{
@@ -38,7 +35,6 @@ function ManagerPage() {
         setDeliveryinfo(false);
         setMemberinfo(false);
         setDashBoard(false);
-        setProductDetail(false);
     }
 
     const dashBoardOpen= ()=>{
@@ -46,16 +42,7 @@ function ManagerPage() {
         setAddressinfo(false);
         setDeliveryinfo(false);
         setMemberinfo(false);
-        setProductDetail(false);
     }
-
-    // const productDetailOpen=()=>{
-    //     setProductDetail(true);
-    //     setDashBoard(false);
-    //     setAddressinfo(false);
-    //     setDeliveryinfo(false);
-    //     setMemberinfo(false);
-    // }
 
     let user_email = 'suovj140@gmail.com';
 
@@ -66,7 +53,7 @@ function ManagerPage() {
         ApiService.getUserByID(user_email)
         .then( res => {
             setuserinfo(res.data);
-            console.log(userinfo);
+            // console.log(userinfo);
             setState(0);
             // console.log("state : "+state);
             // console.log("user_seq : "+userinfo.user_seq);
@@ -81,7 +68,7 @@ function ManagerPage() {
 
     // 비밀번호 입력창에서 enter치면 checkPW 함수 불러오기
     const onKeyPress = (e) => {
-        if(e.key == 'Enter'){
+        if(e.key === 'Enter'){
             checkPW();
         }
     }

@@ -1,5 +1,5 @@
-import React, {useState,useEffect} from 'react';
-import {Table, TableBody, TableCell, TableHead, TableRow, Grid, Button} from '@material-ui/core';
+import React, {useState} from 'react';
+import {Button} from '@material-ui/core';
 import ApiService from '../../ApiService';
 
 function InsertUserAccount(props) {
@@ -14,7 +14,7 @@ function InsertUserAccount(props) {
             user_email : user_email,
             user_repay : user_repay,
         }
-        console.log(userRepay);
+        // console.log(userRepay);
 
         ApiService.insertUserRepay(userRepay);
         alert('소득공제용 현금영수증 번호가 등록됐습니다.')
@@ -23,7 +23,7 @@ function InsertUserAccount(props) {
 
     const onChangePhone = (e) =>{
         setuser_repay(e.target.value);
-        console.log("user_repay : " + user_repay);
+        // console.log("user_repay : " + user_repay);
     }
 
     return (

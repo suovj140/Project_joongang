@@ -70,7 +70,7 @@
     </select>
 
     <update id="UpdateUserAddress" parameterType="com.example.demo.vo.UserVO">
-        update tbl_address_info set post_code = #{post_code}, address = #{address}, address_phone = #{address_phone}, address_phone2 = #{address_phone2}, detail_address = #{detail_address}, address_name = #{address_name} where address_seq = #{address_seq}
+        update tbl_address_info set post_code = #{post_code}, address = #{address}, address_phone = #{address_phone}, address_phone2 = #{address_phone2}, detail_address = #{detail_address}, address_name = #{address_name}, user_name = #{user_name} where address_seq = #{address_seq}
     </update>
 
     <delete id="DeleteUserAddress" parameterType="int">
@@ -78,11 +78,11 @@
     </delete>
 
     <insert id="InsertUserAddress" parameterType="com.example.demo.vo.UserVO">
-        insert into tbl_address_info (address_seq, user_email, address_name, post_code, address, detail_address, address_phone
+        insert into tbl_address_info (address_seq, user_email, address_name, post_code, address, detail_address, address_phone, user_name
         <if test="address_phone2 != null">
             , address_phone2
         </if>
-        ) values(tbl_address_info_seq.nextval, #{user_email}, #{address_name}, #{post_code}, #{address}, #{detail_address}, #{address_phone}
+        ) values(tbl_address_info_seq.nextval, #{user_email}, #{address_name}, #{post_code}, #{address}, #{detail_address}, #{address_phone}, #{user_name}
         <if test="address_phone2 != null">
             , #{address_phone2}
         </if>

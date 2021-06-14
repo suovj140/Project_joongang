@@ -1,5 +1,5 @@
-import React, {useState,useEffect} from 'react';
-import {Table, TableBody, TableCell, TableHead, TableRow, Grid, Button} from '@material-ui/core';
+import React, {useState} from 'react';
+import {Button} from '@material-ui/core';
 import ApiService from '../../ApiService';
 
 function UpdateUserRepayComponent(props) {
@@ -14,7 +14,7 @@ function UpdateUserRepayComponent(props) {
             user_repay : user_repay,
             user_email : user_email,
         }
-        console.log(userRepay);
+        // console.log(userRepay);
         if(userRepay.user_repay === null){
             alert('소득공제용 정보를 확인해주세요.');
         }else{

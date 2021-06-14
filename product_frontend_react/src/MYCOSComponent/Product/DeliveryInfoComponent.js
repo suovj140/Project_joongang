@@ -1,17 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {Table, TableBody, TableCell, TableHead, TableRow, Grid, Button} from '@material-ui/core';
 import ApiService from '../../ApiService';
-import PropTypes from 'prop-types';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
-import FirstPageIcon from '@material-ui/icons/FirstPage';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import LastPageIcon from '@material-ui/icons/LastPage';
+import ModalOrderInfo from './ModalOrderInfoComponent';
 
 const columns = [
     { id: 'name', label: '주문', minWidth: 60 },
@@ -20,29 +14,6 @@ const columns = [
     { id: 'size', label: '총계', minWidth: 200 },
     { id: 'density', label: '', minWidth: 200, align: 'right' },
   ];
-  
-//   function createData(name, code, population, size) {
-//     const density = population / size;
-//     return { name, code, population, size, density };
-//   }
-  
-//   const rows = [
-//     createData('India', 'IN', 1324171354, 3287263),
-//     createData('China', 'CN', 1403500365, 9596961),
-//     createData('Italy', 'IT', 60483973, 301340),
-//     createData('United States', 'US', 327167434, 9833520),
-//     createData('Canada', 'CA', 37602103, 9984670),
-//     createData('Australia', 'AU', 25475400, 7692024),
-//     createData('Germany', 'DE', 83019200, 357578),
-//     createData('Ireland', 'IE', 4857000, 70273),
-//     createData('Mexico', 'MX', 126577691, 1972550),
-//     createData('Japan', 'JP', 126317000, 377973),
-//     createData('France', 'FR', 67022000, 640679),
-//     createData('United Kingdom', 'GB', 67545757, 242495),
-//     createData('Russia', 'RU', 146793744, 17098246),
-//     createData('Nigeria', 'NG', 200962417, 923768),
-//     createData('Brazil', 'BR', 210147125, 8515767),
-//   ];
   
   const useStyles = makeStyles({
     root: {
@@ -59,26 +30,30 @@ const columns = [
   
 
   export default function StickyHeadTable(props) {
-
+    const [state, setState] = useState(0);
     const [orderList, setOrderList] = useState([]);
 
     useEffect(() => {
         ApiService.getUserOrderList(props.user.user_email)
         .then( res => {
             setOrderList(res.data);
-            console.log(orderList);
-            console.log(orderList.length);
+            setState(1);
+            // console.log(orderList);
+            // console.log(orderList.length);
         })
         .catch(err => {
             console.log('product_list print error!', err);
         })
-    },[props.user.user_email])
+    },[props.user.user_email, state])
 
 
     const classes = useStyles();
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
-  
+    const [openOrderInfo, setOpenOrderInfo] = useState(false);
+    const [orderInfo, setOrderInfo] = useState([]);
+    const [orderDetailInfo, setOrderDetailInfo] = useState([]);
+
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
     };
@@ -87,9 +62,37 @@ const columns = [
       setRowsPerPage(+event.target.value);
       setPage(0);
     };
+
+    const handleClose = (e) => {
+        setOpenOrderInfo(false);
+    }
   
     function selectOrderInfo(order_id){
+        setOpenOrderInfo(true);
+
+        // 해당 order_id로 order table에서 조회하기
+        ApiService.selectOrderInfo(order_id)
+            .then( res => {
+            setOrderInfo(res.data);
+            console.log(orderInfo);
+        })
+
+        // 해당 order_id로 product, order_detail을 조인해서 조회하기
+        ApiService.selectOrderDetailInfo(order_id)
+            .then( res => {
+            setOrderDetailInfo(res.data);
+            console.log(orderDetailInfo);
+        })
+    }
       
+    function returnOrder(order_id, order_status){
+        if(order_status === '배송준비중'){
+            ApiService.returnOrder(order_id);
+            alert('주문 취소 요청 됐습니다.');
+        }else{
+            alert('이미 주문취소 요청을 했습니다.');
+        }
+        setState(2);
     }
 
     return (
@@ -120,12 +123,15 @@ const columns = [
                             <TableCell style={{border:'0px'}}>{order.order_status}</TableCell>
                             <TableCell style={{border:'0px'}}>총 금액 : {order.total_price}원, {order.order_product_amount}개 상품</TableCell>
                             <TableCell style={{textAlign:'right', border:'0px'}}>
-                                <Button style={button1} onClick={() => selectOrderInfo(order.order_id)}>주문상세</Button>
-                                <Button style={button2}>취소</Button>
+                                <Button style={button1} onClick={() => selectOrderInfo(order.order_id)}>주문내역</Button>
+                                <Button style={button2} onClick={() => returnOrder(order.order_id, order.order_status)}>취소</Button>
                             </TableCell>
                         </TableRow>
+                        
                         );
                     })}
+                    {openOrderInfo && <ModalOrderInfo openOrderInfo={openOrderInfo} orderInfo={orderInfo} orderDetailInfo={orderDetailInfo} handleClose={handleClose}/>}
+
                     </TableBody>
                 </Table>
             </TableContainer>

@@ -15,4 +15,5 @@ public class OrderVO {
         private Long total_price;
         private String order_status;
         private String order_date;
+        private String user_name;
 }

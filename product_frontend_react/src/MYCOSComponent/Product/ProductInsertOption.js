@@ -8,7 +8,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import { Input } from '@material-ui/core';
 
 import '../managerCss/managerInsertOption.css';
@@ -31,7 +30,7 @@ function ProductInsert() {
     function onColor(e){
         //setProduct_color(product_color.concat(e.currentTarget.value));
         setProduct_color(e.currentTarget.value);
-        console.log(product_stock);
+        // console.log(product_stock);
     }
     function onStock(e){
         //const stock = parseInt(e.currentTarget.value);
@@ -41,13 +40,13 @@ function ProductInsert() {
      
     
     useEffect(()=>{
-        console.log("getProduct 실행");
+        // console.log("getProduct 실행");
         getProduct();
     },[])
 
     function getProduct(){
         const products = window.localStorage.getItem('product');
-        console.log(products);
+        // console.log(products);
         setProduct({
             product: JSON.parse(products)
         })
@@ -129,7 +128,7 @@ function ProductInsert() {
                         </TableContainer>
                         </div>
                         <button onClick={saveProduceOption}className="signUp-butten" >submit</button>
-                        <button onClick={()=>console.log(productOptions)}className="signUp-butten" >출력</button>
+                        {/* <button onClick={()=>console.log(productOptions)}className="signUp-butten" >출력</button> */}
                 <button onClick={onclick} className="signUp-butten" >등록</button>
         </>
     )

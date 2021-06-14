@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Grid, Button, makeStyles, Modal, Backdrop, Fade} from '@material-ui/core';
+import {Button, makeStyles, Modal, Backdrop, Fade} from '@material-ui/core';
 
 function ModalUpdateAccountComponent(props) {
 

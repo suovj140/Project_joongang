@@ -81,6 +81,17 @@ class ApiService {
         return axios.get(ORDER_API_BASE_URL+'/getuserorderlist/'+user_email);
     }
 
+    returnOrder(order_id){
+        return axios.get(ORDER_API_BASE_URL+'/returnorder/'+order_id);
+    }
+
+    selectOrderInfo(order_id){
+        return axios.get(ORDER_API_BASE_URL+'/selectorderinfo/'+order_id);
+    }
+
+    selectOrderDetailInfo(order_id){
+        return axios.get(ORDER_API_BASE_URL+'/selectorderdetailinfo/'+order_id);
+    }
 }
 
 export default new ApiService();

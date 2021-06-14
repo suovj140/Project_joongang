@@ -1,5 +1,5 @@
-import React, {useState,useEffect} from 'react';
-import {Table, TableBody, TableCell, TableHead, TableRow, Grid, Button} from '@material-ui/core';
+import React, {useState} from 'react';
+import {Button} from '@material-ui/core';
 import ApiService from '../../ApiService';
 
 function InsertUserAccount(props) {
@@ -18,7 +18,7 @@ function InsertUserAccount(props) {
             user_name : user_name,
             user_email : user_email,
         }
-        console.log(userAccount);
+        // console.log(userAccount);
 
         ApiService.insertUserAccount(userAccount);
         alert('환불 계좌 등록에 성공했습니다.')

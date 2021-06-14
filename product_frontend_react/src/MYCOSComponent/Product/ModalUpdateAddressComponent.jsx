@@ -1,8 +1,6 @@
-import React, {useState} from 'react';
-import {Table, TableBody, TableCell, TableRow, Grid, Button, Modal, Backdrop, Fade} from '@material-ui/core';
+import React from 'react';
+import {Button, Modal, Backdrop, Fade} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core';
-
-import DaumPostcode from 'react-daum-postcode';
 
 function ModalDetailAddressComponent(props) {
 
@@ -38,18 +36,9 @@ function ModalDetailAddressComponent(props) {
                 <Fade in={props.isOpenUpdatePost}>
                     <div className={classes.paper}>
                         <div style={{textAlign:'left', marginTop:'10px'}}>
-                        {/* <h5 style={{margin:'0px 0px 20px 0px'}}>배송지 정보</h5> */}
                             <div style={{fontSize:'11px', color:'black', textAlign:'left', marginBottom:'5px'}}>이메일</div>
                             <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'285px', marginBottom:'15px'}} type="email" value={UserAddress.user_email} name="change_email" onChange={props.onChange}/>
 
-                            {/* <div style={{fontSize:'11px', color:'black', textAlign:'left', marginBottom:'5px'}}>휴대폰 번호</div>
-                            <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'285px', marginBottom:'5px'}} type="email" value={UserAddress.user_phone} name="change_phone" onChange={props.onChange}/>
-                            <div style={{fontSize:'11px', color:'gray', textAlign:'left', marginBottom:'15px'}}>"-" 없이 숫자만 입력해 주세요.</div> */}
-
-                            {/* <div style={{fontSize:'11px', color:'black', textAlign:'left', marginBottom:'5px'}}>추가 연락처</div>
-                            <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'285px', marginBottom:'5px'}} type="email" value={UserAddress.user_phone2} name="change_phone2" onChange={props.onChange} />                            
-                            <div style={{fontSize:'11px', color:'gray', textAlign:'left', marginBottom:'15px'}}>"-" 없이 숫자만 입력해 주세요.(선택)</div> */}
-                            
                             <div style={{fontSize:'11px', color:'black', textAlign:'left', marginBottom:'5px'}}>배송지주소</div>
                             <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'175px', marginBottom:'15px'}} type="text" value={UserAddress.post_code} name="change_post_code" onChange={props.onChange}/>
                             <Button style={{backgroundColor:'#444', width:'105px', height:'30px', borderRadius:'0px', marginLeft:'10px',marginBottom:'0px', boxShadow:'none', fontSize:'13px', color:'white'}} onClick={() => props.toggleNav()}>찾기</Button>

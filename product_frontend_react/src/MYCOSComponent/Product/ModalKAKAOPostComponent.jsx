@@ -1,8 +1,6 @@
-import React, {useState,useEffect} from 'react';
-import {Table, TableBody, TableCell, TableRow, Grid, Button, Modal, Backdrop, Fade} from '@material-ui/core';
+import React from 'react';
+import {Modal, Backdrop, Fade} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core';
-
-import DaumPostcode from 'react-daum-postcode';
 
 function ModalKAKAOPostComponent(props) {
 

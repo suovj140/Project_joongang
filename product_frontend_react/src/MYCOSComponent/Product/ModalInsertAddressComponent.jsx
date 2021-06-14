@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Table, TableBody, TableCell, TableRow, Grid, Button, Modal, Backdrop, Fade} from '@material-ui/core';
+import {Button, Modal, Backdrop, Fade} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core';
 import ApiService from '../../ApiService';
 
@@ -38,9 +38,10 @@ function ModalDetailAddressComponent(props) {
                 address : props.address,
                 detail_address : props.detail_address,
                 address_name : props.address_name,
+                user_name : props.user_name,
             }
-            console.log(user_info);
-            if(user_info.user_email != null && user_info.address_phone != null && user_info.post_code != null && user_info.address != null && user_info.detail_address != null && user_info.address_name != null){
+            // console.log(user_info);
+            if(user_info.user_email !== null && user_info.address_phone !== null && user_info.post_code !== null && user_info.address !== null && user_info.detail_address !== null && user_info.address_name !== null && user_info.user_name !== null){
                 ApiService.insertUserAddress(user_info);
                 props.handleClose();
                 props.setState(5);
@@ -70,6 +71,9 @@ function ModalDetailAddressComponent(props) {
                             <div style={{fontSize:'11px', color:'black', textAlign:'left', marginBottom:'5px'}}>휴대폰 번호</div>
                             <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'285px', marginBottom:'5px'}} type="email" value={props.address_phone} name="change_phone" onChange={props.onChange}/>
                             <div style={{fontSize:'11px', color:'gray', textAlign:'left', marginBottom:'15px'}}>"-" 없이 숫자만 입력해 주세요.</div>
+
+                            <div style={{fontSize:'11px', color:'black', textAlign:'left', marginBottom:'5px'}}>받는 사람</div>
+                            <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'285px', marginBottom:'15px'}} type="email" value={props.user_name} name="change_user_name" onChange={props.onChange}/>
 
                             <div style={{fontSize:'11px', color:'black', textAlign:'left', marginBottom:'5px'}}>주소 이름</div>
                             <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'285px', marginBottom:'15px'}} type="email" value={props.address_name} name="change_address_name" onChange={props.onChange}/>

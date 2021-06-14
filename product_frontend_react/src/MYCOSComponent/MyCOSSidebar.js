@@ -7,8 +7,8 @@ function ManagerSidebar({memberinfoOpen,deliveryinfoOpen,addressinfoOpen}) {
             <div style={labelStyle} onClick={()=>memberinfoOpen()}>회원정보</div>
             <div style={labelStyle} onClick={()=>deliveryinfoOpen()}>주문내역</div>
             <div style={labelStyle} onClick={()=>addressinfoOpen()}>배송지관리</div>
-            <div style={labelStyle} >예치금</div>
-            <div style={labelStyle}>영수증/세금계산서</div>
+            {/* <div style={labelStyle} >예치금</div>
+            <div style={labelStyle}>영수증/세금계산서</div> */}
         </Grid>
     )
 }
