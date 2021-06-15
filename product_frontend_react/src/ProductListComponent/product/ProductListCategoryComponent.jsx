@@ -95,6 +95,7 @@ function ProductListComponent(props){
 
     function selectAccessoryList(selectCategory){
         window.localStorage.setItem("selectCategory", selectCategory);
+        props.history.push('/accessories-list')
     }
 
     return (
@@ -107,11 +108,11 @@ function ProductListComponent(props){
                         
                     <div>
                         <FormControl style={{minWidth:'80px'}}>
-                            <Link to="/product-list"><button variant="contained" style={{border:'0px'}} onClick = {() => {selectCategoryList(null)}}><InputLabel>Clothing</InputLabel></button></Link>
+                            <button variant="contained" style={{border:'0px'}} onClick = {() => {selectCategoryList(null)}}><InputLabel>Clothing</InputLabel></button>
                             {/* </a> */}
                         </FormControl>
                         <FormControl style={{minWidth:'80px'}}>
-                            <Link to="/accessories-list"><button variant="contained" style={{border:'0px'}} onClick = {() => {selectAccessoryList('악세사리')}}><InputLabel>Accessories</InputLabel></button></Link>
+                            <button variant="contained" style={{border:'0px'}} onClick = {() => {selectAccessoryList('악세사리')}}><InputLabel>Accessories</InputLabel></button>
                         </FormControl>
                     </div>
 
@@ -122,7 +123,7 @@ function ProductListComponent(props){
                         <ul style={{paddingLeft:'0px', marginTop:'0px'}}>
                             <SelectOptionComponenttest selectOption={selectOption} label="Style" name="product_category" items={['치마','원피스','바지','모자']}/>
 
-                            <SelectOptionComponenttest selectOption={selectOption} label="Color" name="select_color" items={['BLACK','WHITE','RED','YELLO','GREEN']}/>
+                            <SelectOptionComponenttest selectOption={selectOption} label="Color" name="select_color" items={['BLACK','WHITE','RED','YELLOW','GREEN']}/>
 
                             <SelectOptionComponenttest selectOption={selectOption} label="Size" name="select_size" items={['XS','S','M','L','XL']}/>
 

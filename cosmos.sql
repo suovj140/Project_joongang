@@ -1467,11 +1467,16 @@ create table tbl_order_detail (
     amount number not null,
     primary key(order_detail_num)
 );
+drop sequence tbl_order_details_seq;
+
 create sequence tbl_order_details_seq;
+
 create sequence tbl_address_info_seq;
+
 alter table tbl_order_detail
     add constraint tbl_order_detail_orderId foreign key(order_Id)
     references tbl_order(order_id);
+    
 alter table tbl_order_detail
     add constraint tbl_order_detail_product_seq foreign key(product_seq)
     references tbl_product(product_seq);
@@ -1487,7 +1492,7 @@ select * from product;
 
 update product set product_img = '이미지1.jpg';
 
-
+drop sequence product_seq;
 drop table product;
 drop table product_option;
 
@@ -1556,6 +1561,15 @@ select * from tbl_product;
     
 create sequence tbl_product_seq increment by 1 start with 0 minvalue 0;
 create sequence tbl_product_option_seq increment by 1 start with 0 minvalue 0;
+drop table tbl_product;
+drop table tbl_product_option;
+drop table tbl_order;
+drop table tbl_order_detail;
+drop table product;
+drop sequence tbl_product_seq;
+drop sequence tbl_product_option_seq;
+
+select * from tbl_product;
 
 insert into tbl_product values(tbl_product_seq.nextval, 1, '아동상품1', 20000, '이미지4.jpg', 'XL','BLACK','KIDS','아동상품입니다.','면','바지',SYSDATE);
 insert into tbl_product values(tbl_product_seq.nextval, 1, '아동상품1', 20000, '이미지4.jpg', 'L','WHITH','KIDS','아동상품입니다.','면','바지',SYSDATE);
@@ -1707,41 +1721,6 @@ select * from tbl_product;
 select * from tbl_product_option;
 
 
-select *
-from
-(select rownum rnum, t.*
-from
-(select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size
-from
-tbl_product p, (select product_id, sum(product_saled) product_saled from tbl_product_option group by product_id) o where p.product_id = o.product_id
-group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img, product_saled) t);
-
-
-
-
-
-
-select *
-from
-(select rownum rnum, p.*
-from
-(select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size, product_saled
-from
-tbl_product, 
-(select product_id, sum(product_saled) product_saled from tbl_product_option group by product_id) o
-where tbl_product.product_id = o.product_id
-group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img, product_saled) p);
-
-select 
-p.product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size, sum(product_saled)
-from
-tbl_product p, (select product_id, sum(product_saled) product_saled from tbl_product_option group by product_id) o group by p.product_id, product_title, product_content, product_price, product_gender, product_category, product_img;
-
-
-
-select product_id, sum(product_saled) product_saled from tbl_product_option group by product_id;
-where tbl_product.product_id = o.product_id;
-
 
 
 
@@ -1756,15 +1735,6 @@ commit;
 
 select max(rownum) from (select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size
 from tbl_product group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img) p;
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1789,7 +1759,7 @@ group by product_id, product_title, product_content, product_price, product_gend
 
 
 
-
+drop table tbl_orderdetail;
 
 
 
@@ -1807,7 +1777,7 @@ update tbl_order set pay_info = '카카오페이';
 select * from tbl_order where order_id = '주문1';
 select p.*, od.order_id, od.money, od.amount from tbl_order_detail od, tbl_product p where od.order_id = '주문1' and od.product_seq = p.product_seq;
 
-commit;
+
 
 
 -- 20210614 아침시작
@@ -1823,6 +1793,8 @@ insert into tbl_order_detail values(6, '주문3', 2, 277760, 2);
 insert into tbl_order_detail values(7, '주문3', 7, 2990, 1);
 insert into tbl_order_detail values(8, '주문3', 10, 23000, 3);
 
-alter table tbl_address_info add user_name varchar2(100) not null;
+
 alter table tbl_order add user_name varchar2(100);
 update tbl_order set user_name = '후니택배';
+
+commit;

@@ -107,7 +107,7 @@ function ProductListComponent(props){
 
                     <div style={{float:'left'}}>
                         <ul style={{paddingLeft:'0px', marginTop:'0px'}}>
-                            <SelectOptionComponenttest selectOption={selectOption} label="Color" name="select_color" items={['BLACK','WHITE','RED','YELLO','GREEN']}/>
+                            <SelectOptionComponenttest selectOption={selectOption} label="Color" name="select_color" items={['BLACK','WHITE','RED','YELLOW','GREEN']}/>
 
                             <SelectOptionComponenttest selectOption={selectOption} label="Size" name="select_size" items={['XS','S','M','L','XL']}/>
 

@@ -63,8 +63,8 @@ function Banner(props){
                                 <React.Fragment key={anchor}>
                                 <div onClick={toggleDrawer(anchor, true)} style={{width:'23px',height:'23px'}}><SearchOutlinedIcon/></div>
                                 <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-                                    <form noValidate action="/search-keyword" autoComplete="off" style={{width:'100%', height:'80px'}}>
-                                        <TextField id="standard-search" label="Search" type="search" onChange={searchKeyword} style={{paddingTop:'30px',width:'90%'}}/>
+                                    <form noValidate action="/search-keyword" autoComplete="off" style={{width:'100%', height:'80px', display:'flex', justifyContent:'center'}}>
+                                        <TextField id="standard-search" label="Search" type="search" onChange={searchKeyword} style={{paddingTop:'30px',width:'80%'}}/>
                                     </form>
                                 </Drawer>
                                 </React.Fragment>
